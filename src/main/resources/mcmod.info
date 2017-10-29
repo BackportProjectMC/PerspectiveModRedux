@@ -1,0 +1,16 @@
+[
+{
+  "modid": "perspectivemodredux",
+  "name": "Perspective Mod Redux",
+  "description": "Remade version of Perspective Mod/Cheatbreaker F5 Mod",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["BoxOfFlex"],
+  "credits": "Canelex",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
