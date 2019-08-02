@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "package": "pm.c7.perspective.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [],
+    "client": [
+        "MixinCamera",
+        "MixinMouse"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

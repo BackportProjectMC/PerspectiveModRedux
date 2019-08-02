@@ -1,0 +1,24 @@
+{
+    "schemaVersion": 1,
+    "id": "perspectivemod",
+    "version": "${version}",
+    "name": "Perspective Mod Redux",
+    "description": "360 Degree Perspective/Cheatbreaker F5 Mod for modern Minecraft",
+    "authors": ["Cynosphere"],
+    "contact": {
+        "sources": "https://github.com/BackportProjectMC/PerspectiveModRedux"
+    },
+    "license": "MIT",
+    "environment": "client",
+    "entrypoints": {
+        "client": ["pm.c7.perspective.PerspectiveMod"]
+    },
+    "mixins": ["perspective.mixins.json"],
+    "depends": {
+        "fabricloader": ">=0.4.0",
+        "fabric": "*"
+    },
+    "custom": {
+        "modmenu:clientsideOnly": true
+    }
+}
