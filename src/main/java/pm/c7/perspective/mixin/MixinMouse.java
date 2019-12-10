@@ -20,7 +20,7 @@ public class MixinMouse {
     @Shadow
     private double cursorDeltaY;
     @Shadow
-    private double field_1785 = Double.MIN_VALUE;
+    private double lastMouseUpdateTime = 4.9E-324D;
     @Shadow
     private boolean isCursorLocked;
     @Shadow
@@ -31,8 +31,8 @@ public class MixinMouse {
     @Inject(method="updateMouse",at=@At("HEAD"),cancellable=true)
     private void noPlayerRotation(CallbackInfo info) {
         double time = GlfwUtil.getTime();
-        double min = time - this.field_1785;
-        this.field_1785 = time;
+        double min = time - this.lastMouseUpdateTime;
+        this.lastMouseUpdateTime = time;
         if (this.isCursorLocked() && this.client.isWindowFocused()) {
             double sens = this.client.options.mouseSensitivity * 0.6000000238418579D + 0.20000000298023224D;
             double mult = sens * sens * sens * 8.0D;
