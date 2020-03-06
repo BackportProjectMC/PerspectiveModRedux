@@ -11,7 +11,8 @@
     "license": "MIT",
     "environment": "client",
     "entrypoints": {
-        "client": ["pm.c7.perspective.PerspectiveMod"]
+        "client": ["pm.c7.perspective.PerspectiveMod"],
+        "modmenu": ["pm.c7.perspective.integration.ModMenuConfig"]
     },
     "mixins": ["perspective.mixins.json"],
     "depends": {

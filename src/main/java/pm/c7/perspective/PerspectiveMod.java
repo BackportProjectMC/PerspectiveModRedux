@@ -1,5 +1,8 @@
 package pm.c7.perspective;
 
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.JanksonConfigSerializer;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.PartitioningSerializer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
@@ -24,34 +27,58 @@ public class PerspectiveMod implements ClientModInitializer {
 
     private MinecraftClient client;
 
-    public boolean PERSPECTIVE_ENABLED;
+    public PerspectiveConfig config;
+
+    public boolean perspectiveEnabled;
     public float cameraPitch;
     public float cameraYaw;
+    private boolean held = false;
 
     public PerspectiveMod(){
         this.client = MinecraftClient.getInstance();
-        this.PERSPECTIVE_ENABLED = false;
+        this.perspectiveEnabled = false;
         PerspectiveMod.INSTANCE = this;
     }
 
     @Override
     public void onInitializeClient() {
+        AutoConfig.register(
+                PerspectiveConfig.class,
+                PartitioningSerializer.wrap(JanksonConfigSerializer::new)
+        );
+
+        this.config = AutoConfig.getConfigHolder(PerspectiveConfig.class).getConfig();
+
         KeyBindingRegistryImpl.INSTANCE.addCategory(KEYBIND_CATEGORY);
         KeyBindingRegistryImpl.INSTANCE.register(toggleKey = FabricKeyBinding.Builder.create(TOGGLE_KEYBIND, InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_F4, KEYBIND_CATEGORY).build());
 
         ClientTickCallback.EVENT.register(e -> {
-           if (toggleKey.wasPressed()) {
-               this.PERSPECTIVE_ENABLED = !this.PERSPECTIVE_ENABLED;
+            if (config.main.holdMode) {
+                this.perspectiveEnabled = toggleKey.isPressed();
 
-               this.cameraPitch = this.client.player.pitch;
-               this.cameraYaw = this.client.player.yaw;
+                if (this.perspectiveEnabled && !this.held) {
+                    this.held = true;
+                    this.cameraPitch = this.client.player.pitch;
+                    this.cameraYaw = this.client.player.yaw;
+                } else if(!this.perspectiveEnabled) {
+                    this.held = false;
+                }
 
-               this.client.options.perspective = this.PERSPECTIVE_ENABLED ? 1 : 0;
-           }
+                this.client.options.perspective = this.perspectiveEnabled ? 1 : 0;
+            } else {
+                if (toggleKey.wasPressed()) {
+                    this.perspectiveEnabled = !this.perspectiveEnabled;
 
-           if (this.PERSPECTIVE_ENABLED && this.client.options.perspective != 1){
-               this.PERSPECTIVE_ENABLED = false;
-           }
+                    this.cameraPitch = this.client.player.pitch;
+                    this.cameraYaw = this.client.player.yaw;
+
+                    this.client.options.perspective = this.perspectiveEnabled ? 1 : 0;
+                }
+            }
+
+            if (this.perspectiveEnabled && this.client.options.perspective != 1){
+               this.perspectiveEnabled = false;
+            }
         });
     }
 }

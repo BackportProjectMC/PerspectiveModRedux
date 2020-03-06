@@ -1,11 +1,7 @@
 package pm.c7.perspective.mixin;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.render.Camera;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.BlockView;
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +34,7 @@ public class MixinCamera {
 
     @Inject(method="update",at=@At("HEAD"),cancellable=true)
     private void updateCamera(BlockView area, Entity entity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo info){
-        if (PerspectiveMod.INSTANCE.PERSPECTIVE_ENABLED) {
+        if (PerspectiveMod.INSTANCE.perspectiveEnabled) {
             this.ready = true;
             this.area = area;
             this.focusedEntity = entity;

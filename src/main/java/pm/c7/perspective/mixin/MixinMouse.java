@@ -50,7 +50,7 @@ public class MixinMouse {
                 deltaY = this.cursorDeltaY * mult;
             }
 
-            if (PerspectiveMod.INSTANCE.PERSPECTIVE_ENABLED) {
+            if (PerspectiveMod.INSTANCE.perspectiveEnabled) {
                 PerspectiveMod.INSTANCE.cameraYaw += deltaX / 8.0D;
                 PerspectiveMod.INSTANCE.cameraPitch += deltaY / 8.0D;
 
@@ -67,7 +67,7 @@ public class MixinMouse {
             }
 
             this.client.getTutorialManager().onUpdateMouse(deltaX, deltaY);
-            if (this.client.player != null && !PerspectiveMod.INSTANCE.PERSPECTIVE_ENABLED) {
+            if (this.client.player != null && !PerspectiveMod.INSTANCE.perspectiveEnabled) {
                 this.client.player.changeLookDirection(deltaX, deltaY * (double)yDir);
             }
         }else{
