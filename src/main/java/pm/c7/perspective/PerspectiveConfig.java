@@ -42,13 +42,8 @@ public class PerspectiveConfig extends PartitioningSerializer.GlobalData {
 
         return new Screen(new LiteralText("")) {
             @Override
-            public void render(int int_1, int int_2, float float_1) {
-                super.render(int_1, int_2, float_1);
-            }
-
-            @Override
             protected void init() {
-                this.minecraft.openScreen(parent);
+                this.client.openScreen(parent);
             }
         };
     }

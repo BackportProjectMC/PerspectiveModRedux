@@ -1,5 +1,6 @@
 package pm.c7.perspective.integration;
 
+import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,12 +13,7 @@ import java.util.function.Function;
 @Environment(EnvType.CLIENT)
 public class ModMenuConfig implements ModMenuApi {
     @Override
-    public String getModId() {
-        return PerspectiveMod.MOD_ID;
-    }
-
-    @Override
-    public Function<Screen, ? extends Screen> getConfigScreenFactory() {
+    public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return PerspectiveConfig::getConfigScreen;
     }
 }
