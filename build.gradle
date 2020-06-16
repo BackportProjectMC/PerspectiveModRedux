@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'fabric-loom' version '0.4-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -19,7 +19,6 @@ repositories {
 	maven { url "https://maven.fabricmc.net/" }
 	maven { url "https://minecraft.curseforge.com/api/maven" }
 	maven { url "https://dl.bintray.com/shedaniel/autoconfig1u/" }
-	maven { url "https://impactdevelopment.github.io/maven/" }
 }
 
 dependencies {
