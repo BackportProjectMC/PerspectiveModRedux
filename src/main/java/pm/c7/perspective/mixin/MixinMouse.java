@@ -22,7 +22,7 @@ public class MixinMouse {
     @Shadow
     private double lastMouseUpdateTime = 4.9E-324D;
     @Shadow
-    private boolean isCursorLocked;
+    private boolean cursorLocked;
     @Shadow
     private final SmoothUtil cursorXSmoother = new SmoothUtil();
     @Shadow
@@ -80,6 +80,6 @@ public class MixinMouse {
 
     @Shadow
     public boolean isCursorLocked() {
-        return this.isCursorLocked;
+        return this.cursorLocked;
     }
 }
