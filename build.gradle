@@ -1,0 +1,109 @@
+
+// For those who want the bleeding edge
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven'
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.6-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.spongepowered.mixin'
+
+version = project.version
+group = "pm.c7.pmr"
+archivesBaseName = project.modName
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = 1.8
+
+repositories {
+    maven {
+        name "sponge"
+        url "https://repo.spongepowered.org/maven/"
+    }
+}
+
+minecraft {
+    version = "${project.minecraftVersion}-${project.forgeVersion}"
+    runDir = "run"
+
+    mappings = project.mappings
+
+    replace("@MOD_ID@": project.modId,
+            "@MOD_NAME@": project.modName,
+            "@VERSION@": project.version,
+            "@MOD_ACCEPTED@": project.acceptedMinecraftVersions)
+    replaceIn("${project.mainClass}.java")
+}
+
+dependencies {
+    provided("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
+        exclude module: "launchwrapper"
+        exclude module: "guava"
+        exclude module: "gson"
+        exclude module: "commons-io"
+        exclude module: "log4j-core"
+    }
+}
+
+mixin {
+    defaultObfuscationEnv searge
+    add sourceSets.main, "mixins.pmr.refmap.json"
+}
+
+jar {
+    archiveName = "${project.modName}-${project.minecraftVersion}-${project.version}.jar"
+
+    from(configurations.provided.asFileTree.files.collect { it.isDirectory() ? it : zipTree(it) }) {
+        exclude "LICENSE.txt", "META-INF/*.txt", "META-INF/MANIFSET.MF", "META-INF/maven/**", "META-INF/*.RSA", "META-INF/*.SF"
+    }
+
+    manifest.attributes(
+            'FMLAT': "pmr_at.cfg",
+            'MixinConfigs': 'mixins.pmr.json',
+            'TweakOrder': "0",
+            'TweakClass': 'pm.c7.pmr.tweaker.MixinLoadingTweaker',
+            'ModSide': 'CLIENT',
+            'ForceLoadAsMod': true,
+    )
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    exclude "test/**"
+    classifier = "sources"
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

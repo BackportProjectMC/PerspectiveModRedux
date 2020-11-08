@@ -1,0 +1,16 @@
+[
+{
+  "modid": "pmr",
+  "name": "Perspective Mod Redux",
+  "description": "funny backport",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Cynosphere"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
