@@ -15,6 +15,11 @@ import pm.c7.perspective.PerspectiveMod;
 
 @Mixin(Camera.class)
 public class MixinCamera {
+    @Shadow
+    private float pitch;
+    @Shadow
+    private float yaw;
+
     @Inject(method = "update", at = @At(value = "INVOKE", target = "net/minecraft/client/render/Camera.moveBy(DDD)V", ordinal = 0))
     private void perspectiveUpdatePitchYaw(BlockView area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo info) {
         if (PerspectiveMod.INSTANCE.perspectiveEnabled) {
