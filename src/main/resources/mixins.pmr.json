@@ -1,0 +1,9 @@
+{
+  "package": "pm.c7.pmr.mixin",
+  "refmap": "mixins.pmr.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "verbose": true,
+  "mixins": [
+    "MixinEntityRenderer"
+  ]
+}
