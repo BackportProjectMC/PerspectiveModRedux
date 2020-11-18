@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "pm.c7.pmr.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "pmr.refmap.json",
+  "mixins": [],
+  "client": [
+    "MixinMouseHelper",
+    "MixinActiveRenderInfo"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
