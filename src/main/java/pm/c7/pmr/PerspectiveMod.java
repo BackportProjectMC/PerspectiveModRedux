@@ -83,10 +83,10 @@ public class PerspectiveMod {
             if (!this.perspectiveEnabled && this.held) {
                 this.held = false;
 
-                this.client.gameSettings.setPointOfView(PointOfView.FIRST_PERSON);
+                this.client.gameSettings.func_243229_a(PointOfView.FIRST_PERSON);
             }
 
-            if (this.perspectiveEnabled && this.client.gameSettings.getPointOfView() != PointOfView.THIRD_PERSON_BACK) {
+            if (this.perspectiveEnabled && this.client.gameSettings.func_243230_g() != PointOfView.THIRD_PERSON_BACK){
                 this.perspectiveEnabled = false;
             }
         }
@@ -104,7 +104,7 @@ public class PerspectiveMod {
                     this.cameraPitch = this.client.player.rotationPitch;
                     this.cameraYaw = this.client.player.rotationYaw + 180.0F;
 
-                    this.client.gameSettings.setPointOfView(PointOfView.THIRD_PERSON_BACK);
+                    this.client.gameSettings.func_243229_a(PointOfView.THIRD_PERSON_BACK);
                 }
             } else {
                 if (this.toggleKey.isPressed()) {
@@ -113,7 +113,7 @@ public class PerspectiveMod {
                     this.cameraPitch = this.client.player.rotationPitch;
                     this.cameraYaw = this.client.player.rotationYaw + 180.0F;
 
-                    this.client.gameSettings.setPointOfView(this.perspectiveEnabled ? PointOfView.THIRD_PERSON_BACK : PointOfView.FIRST_PERSON);
+                    this.client.gameSettings.func_243229_a(this.perspectiveEnabled ? PointOfView.THIRD_PERSON_BACK : PointOfView.FIRST_PERSON);
                 }
             }
         }

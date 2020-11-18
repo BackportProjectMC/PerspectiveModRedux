@@ -21,7 +21,6 @@ public class MixinMouseHelper {
             locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
     private void perspectiveUpdatePitchYaw(CallbackInfo info, double time, double timeDelta, double sens, double adjustedSens, double x, double y, int invert) {
-        PerspectiveMod.LOGGER.info("{} {} {} {} {} {} {}", time, timeDelta, sens, adjustedSens, x, y, invert);
         if (PerspectiveMod.getInstance().perspectiveEnabled) {
             PerspectiveMod.getInstance().cameraYaw += x / 8.0F;
             PerspectiveMod.getInstance().cameraPitch += (y * invert) / 8.0F;
