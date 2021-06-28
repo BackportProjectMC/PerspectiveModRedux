@@ -35,16 +35,17 @@ public class MixinMouse {
         }
     }
 
-    @Redirect(
+    @Inject(
         method = "updateMouse",
         at = @At(
             value = "INVOKE",
             target = "net/minecraft/client/network/ClientPlayerEntity.changeLookDirection(DD)V"
-        )
+        ),
+            cancellable = true
     )
-    private void perspectivePreventPlayerMovement(ClientPlayerEntity player, double x, double y) {
-        if (!PerspectiveMod.INSTANCE.perspectiveEnabled) {
-            player.changeLookDirection(x, y);
+    private void perspectivePreventPlayerMovement(CallbackInfo info) {
+        if (PerspectiveMod.INSTANCE.perspectiveEnabled) {
+            info.cancel();
         }
     }
 }
