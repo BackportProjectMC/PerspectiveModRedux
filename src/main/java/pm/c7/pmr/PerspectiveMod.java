@@ -145,7 +145,7 @@ public class PerspectiveMod
 
     public static void saveConfig() {
         holdToUse = config.getBoolean("Hold To Use", "main", false, null);
-        lookForwards = config.getBoolean("Look Forwards", "main", false, null);
+        lookForwards = config.getBoolean("Look Forwards", "main", true, null);
         config.save();
     }
 
