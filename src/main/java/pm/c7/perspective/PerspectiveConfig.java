@@ -21,6 +21,7 @@ public class PerspectiveConfig extends PartitioningSerializer.GlobalData {
     @Config(name = "main")
     public static class CategoryMain implements ConfigData {
         public boolean holdMode = false;
+        public boolean lookForwards = true;
     }
 
     // https://github.com/shedaniel/RoughlyEnoughItems/blob/3.x/src/main/java/me/shedaniel/rei/impl/ConfigManagerImpl.java

@@ -3,5 +3,6 @@
     "key.perspectivemod.toggle": "Toggle Perspective",
 
     "config.perspectivemod.title": "Perspective Mod Redux",
-    "config.perspectivemod.main.holdMode": "Hold to use"
+    "config.perspectivemod.main.holdMode": "Hold to use",
+    "config.perspectivemod.main.lookForwards": "Look Forwards"
 }

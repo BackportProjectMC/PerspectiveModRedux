@@ -60,7 +60,13 @@ public class PerspectiveMod implements ClientModInitializer {
                     if (this.perspectiveEnabled && !this.held) {
                         this.held = true;
                         this.cameraPitch = this.client.player.getPitch();
-                        this.cameraYaw = this.client.player.getYaw();
+
+                        if (config.main.lookForwards) {
+                            this.cameraYaw = this.client.player.getYaw();
+                        } else {
+                            this.cameraYaw = this.client.player.getYaw() - 180.0F;
+                        }
+
                         this.client.options.setPerspective(Perspective.THIRD_PERSON_BACK);
                     }
                 } else {
@@ -68,7 +74,12 @@ public class PerspectiveMod implements ClientModInitializer {
                         this.perspectiveEnabled = !this.perspectiveEnabled;
 
                         this.cameraPitch = this.client.player.getPitch();
-                        this.cameraYaw = this.client.player.getYaw();
+
+                        if (config.main.lookForwards) {
+                            this.cameraYaw = this.client.player.getYaw();
+                        } else {
+                            this.cameraYaw = this.client.player.getYaw() - 180.0F;
+                        }
 
                         this.client.options.setPerspective(this.perspectiveEnabled ? Perspective.THIRD_PERSON_BACK : Perspective.FIRST_PERSON);
                     }
