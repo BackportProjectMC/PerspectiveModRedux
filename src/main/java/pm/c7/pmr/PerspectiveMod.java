@@ -41,6 +41,7 @@ public class PerspectiveMod
     private boolean showConfig = false;
 
     private static boolean holdToUse = false;
+    private static boolean lookForwards = false;
 
     public boolean perspectiveEnabled = false;
     public float cameraPitch;
@@ -109,7 +110,11 @@ public class PerspectiveMod
                     this.held = true;
 
                     this.cameraPitch = this.client.thePlayer.rotationPitch;
-                    this.cameraYaw = this.client.thePlayer.rotationYaw + 180.0F;
+                    if(lookForwards) {
+                        this.cameraYaw = this.client.thePlayer.rotationYaw - 180.0F;
+                    } else {
+                        this.cameraYaw = this.client.thePlayer.rotationYaw;
+                    }
 
                     this.client.gameSettings.thirdPersonView = 1;
                 }
@@ -118,7 +123,11 @@ public class PerspectiveMod
                     this.perspectiveEnabled = !this.perspectiveEnabled;
 
                     this.cameraPitch = this.client.thePlayer.rotationPitch;
-                    this.cameraYaw = this.client.thePlayer.rotationYaw;
+                    if(lookForwards) {
+                        this.cameraYaw = this.client.thePlayer.rotationYaw - 180.0F;
+                    } else {
+                        this.cameraYaw = this.client.thePlayer.rotationYaw;
+                    }
 
                     this.client.gameSettings.thirdPersonView = this.perspectiveEnabled ? 1 : 0;
                 }
@@ -136,7 +145,7 @@ public class PerspectiveMod
 
     public static void saveConfig() {
         holdToUse = config.getBoolean("Hold To Use", "main", false, null);
-
+        lookForwards = config.getBoolean("Look Forwards", "main", false, null);
         config.save();
     }
 
