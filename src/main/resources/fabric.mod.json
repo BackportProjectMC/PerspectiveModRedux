@@ -6,7 +6,9 @@
     "description": "360 Degree Perspective/Cheatbreaker F5 Mod for modern Minecraft",
     "authors": ["Cynosphere"],
     "contact": {
-        "sources": "https://github.com/BackportProjectMC/PerspectiveModRedux"
+        "sources": "https://github.com/BackportProjectMC/PerspectiveModRedux",
+        "issues": "https://github.com/BackportProjectMC/PerspectiveModRedux/issues",
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/perspective-mod-redux"
     },
     "license": "MIT",
     "environment": "client",
